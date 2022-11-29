@@ -8,3 +8,5 @@ await mongoClient.connect().then(() => {
   });
 
 export const dbPolls = db.collection("polls");
+
+export const dbOptions = db.collection("options");

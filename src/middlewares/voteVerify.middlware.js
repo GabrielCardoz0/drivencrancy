@@ -11,8 +11,7 @@ export default async function voteVerifyMiddlware(req,res,next) {
             return res.status(422).send(errorList);
         };
 
-        next()
-
+        next();
 
     }catch(err){
         console.log(err);
