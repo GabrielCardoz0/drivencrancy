@@ -10,9 +10,11 @@ export default async function createPollController(req,res) {
             newPoll.expireAt = after30days;
         };
         
-        await dbPolls.insertOne(newPoll);
+        const pollInsert = await dbPolls.insertOne(newPoll);
 
-        return res.sendStatus(201);
+        const newPollObj = {_id:pollInsert.isertedId, ...newPoll};
+        
+        return res.status(201).send(newPollObj);
 
     }catch(err){
         console.log(err);
