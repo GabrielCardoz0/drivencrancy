@@ -14,10 +14,9 @@ export default async function newVoteController(req,res) {
           if(!pollExist) return res.sendStatus(404);
 
 
-
           //Verificação se a enquete está expirada
           const expireAt = pollExist.expireAt;
-          const today = dayjs(Date.now()).format("YYYY-MM-DD HH:MM");
+          const today = dayjs(Date.now()).format("YYYY-MM-DD HH:mm");
           const arrVerication = [expireAt,today];
           if(arrVerication.sort()[1] === today) return res.sendStatus(403);
 
