@@ -24,13 +24,16 @@ export default async function newVoteController(req,res) {
 
           
           const optionList = await dbOptions.find({pollId:ObjectId(newOption.pollId)}).toArray();
-          const titleOfOptionList = optionList.map( o => o.title)
+          const titleOfOptionList = optionList.map( o => o.title);
           if(titleOfOptionList.includes(newOption.title)) return res.sendStatus(409);
 
 
 
-          await dbOptions.insertOne({...newOption, pollId:ObjectId(newOption.pollId)});
-          res.sendStatus(201);
+          const newObjOption = {...newOption, pollId:ObjectId(newOption.pollId)};
+          await dbOptions.insertOne(newObjOption);
+
+
+          res.status(201).send(newObjOption);
     }catch(err){
         console.log(err);
         res.sendStatus(500);
